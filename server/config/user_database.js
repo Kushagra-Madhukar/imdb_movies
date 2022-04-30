@@ -3,8 +3,8 @@ const { DB_STRING } = require('../config');
 
 require('dotenv').config();
 
-const devConnection = DB_STRING;
-const prodConnection = DB_STRING;
+const devConnection = encodeURI(DB_STRING);
+const prodConnection = encodeURI(DB_STRING);
 
 console.log(devConnection)
 // Connect to the correct environment database
