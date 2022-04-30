@@ -14,8 +14,8 @@ import Register from './components/Register';
 function App() {
   const setUserDetails = useContext(UserDispatchContext)
     const userDetails = useContext(UserContext)
-    const [error, setError] = useState(false)
-    const [setShowError, setSetShowError] = useState({head: 'Account Notification', err: ''})
+    // const [error, setError] = useState(false)
+    // const [showError, setShowError] = useState({head: 'Account Notification', err: ''})
     useEffect(() => {
         const axiosCancel = axios.CancelToken.source()
         axios.get(`${BACKEND_URL}/users/profile`, {withCredentials: true})
@@ -25,9 +25,8 @@ function App() {
                   const profile = data.profile
                   // console.log(profile, 'profile')
                   setUserDetails({username: profile?.username, isAdmin: profile?.isAdmin, msgReceivedFromBackend: true, email: profile?.email, connectionErr: false})
-                  if(data.showAlert){ 
-                    setError(error => ({...error, err: data.alertMsg}))
-                    setShowError(true)
+                  if(data.showAlert){
+                    alert(data.alertMsg)
                   }
                 }
                 else {

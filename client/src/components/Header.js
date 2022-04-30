@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+import { PaddingContainer } from '../themes'
 import { UserContext, UserDispatchContext, UserLogoutContext } from '../user.context'
 
 const HeaderContainer = styled.header`
@@ -115,12 +116,12 @@ const HeaderProfile = styled.div`
         height: 100%;
     }
 `
-const Header = ({modifyTheme}) => {
+const Header = () => {
   const userDetails = useContext(UserContext)
   const logout = useContext(UserLogoutContext)
     return (
         <HeaderContainer>
-        {/* <PaddingContainer> */}
+        <PaddingContainer>
             <HeaderHolder>
                 <HeaderMainRegion>
                     <LogoLink to='/'>
@@ -133,7 +134,7 @@ const Header = ({modifyTheme}) => {
                     {!userDetails.isAdmin ? <HeaderLink to='/login'>Login</HeaderLink> : <button onClick={logout}>Logout</button>}
                 </HeaderSecondaryRegion>
             </HeaderHolder>
-        {/* </PaddingContainer> */}
+        </PaddingContainer>
         </HeaderContainer>
     )
 }

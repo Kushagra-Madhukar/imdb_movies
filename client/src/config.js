@@ -1,1 +1,1 @@
-export const BACKEND_URL = process.env.REACT_APP_ENV === 'development' ? "http://localhost:5000" : process.env.REACT_APP_ENV === 'local' ? 'http://localhost:5000' : "http://localhost:5000"
+export const BACKEND_URL = ""

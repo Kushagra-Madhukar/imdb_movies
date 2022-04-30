@@ -1,0 +1,23 @@
+{
+  "name": "movie-list-imdb",
+  "version": "1.0.0",
+  "description": "Go inside client folder and run 'npm install' followed by 'npm start'\r Go inside server folder and run 'npm install' followed by 'npm run local'",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd server && npm install && cd ../client && npm install && npm run build",
+    "heroku-postbuild": "cd server && npm install && cd ../client && npm install && npm run build && cd ..",
+    "start": "cd server && npm run prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kushagra-Madhukar/imdb_movies.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kushagra-Madhukar/imdb_movies/issues"
+  },
+  "homepage": "https://github.com/Kushagra-Madhukar/imdb_movies#readme"
+}

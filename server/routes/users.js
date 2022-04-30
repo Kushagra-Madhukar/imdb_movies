@@ -7,7 +7,7 @@ router.get('/logout', (req, res) => {
     res.send({ success: true, msg: 'Logout success'});
 });
 
-router.get('/profile', utils.authMiddleware, (req, res, next) => {
+router.get('/profile', (req, res, next) => {
     if(req.jwt){
         if(req.jwt.isAdmin){
             res.status(200).json({ success: true, msg: "You are successfully authenticated to this route!", profile: req.jwt, showAlert: false, alertMsg: '', trialActive: false, trialTaken: req.jwt.trialTaken});

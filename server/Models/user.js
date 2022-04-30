@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     },
     hash: String,
     salt: String,
-    isAdmin: {type: Boolean, default: false},
+    isAdmin: {type: Boolean, default: true},
     timestamp: {
         type: Date,
         default: Date.now()

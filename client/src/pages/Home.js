@@ -5,6 +5,7 @@ import Spinner, { StyledSpinner } from "../components/Spinner";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../user.context";
+import { colorPalette, PaddingContainer } from "../themes";
 
 export const genres = [
   { id: 28, name: "Action" },
@@ -70,6 +71,73 @@ const MovieCardContainer = styled.div`
   }
 `;
 
+const SearchBar = styled.input`
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  font-size: 20px;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid ${colorPalette.parrot};
+  width: 100%;
+`
+const SearchBarContainer = styled.div`
+  display: flex;
+  width: 800px;
+  position: relative;
+  margin: 20px auto;
+  @media (max-width: 800px) {
+    width: 80%;
+  }
+  button {
+    outline: none;
+    border: none;
+    position: absolute;
+    right: 0;
+    border-radius: 0 5px 5px 0;
+    top: 0;
+    height: 100%;
+    background-color: #27394e;
+    color: #fff;
+    cursor: pointer;
+  }
+`
+const GenreButton = styled.button`
+  border: 2px solid ${colorPalette.parrot};
+  margin: 5px;
+  background-color: ${colorPalette.parrot};
+  border-radius: 6px;
+  padding: 7px;
+  background-color: ${props => props.active ? colorPalette.parrot : '#fff'};
+  font-size: 15px;
+  outline: none;
+  cursor: pointer;
+  color: ${props => props.active ? '#fff' : colorPalette.parrot};
+  font-weight: bold;
+`
+const SortBar = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  justify-content: space-between;
+  background-color: #ededed;
+`
+const Select = styled.select`
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 5px;
+  color: #000;
+  outline: none;
+  cursor: pointer;
+  font-size: 12px;
+`
+const ClearFilter = styled.button`
+  outline: none;
+  border: none;
+  background-color: inherit;
+  color: ${colorPalette.xparrot};
+  cursor: pointer;
+`
 const Home = () => {
   const userDetails = useContext(UserContext);
   let navigate = useNavigate();
@@ -208,35 +276,33 @@ const Home = () => {
   return !userDetails.msgReceivedFromBackend ? (
     <StyledSpinner />
   ) : (
-    <div>
-      <input
+    <PaddingContainer>
+      <SearchBarContainer>
+      <SearchBar
         type="text"
         onChange={(e) => setSearchTerm(e.target.value)}
         value={searchTerm}
       />
       <button onClick={searchMovies}>Search</button>
+      </SearchBarContainer>
       <br />
       <div style={{ textAlign: "center" }}>
-        {genres.map((genre) => (
-          <button
-            key={genre.name}
+        {genres.map((g) => (
+          <GenreButton
+            key={g.name}
             onClick={(e) => {
               handleGenre(e);
             }}
-            value={genre.name}
-            style={{
-              borderColor: "#19ba90",
-              textAlign: "center",
-              fontSize: "0.9em",
-              margin: "1px",
-            }}
+            active={genre === g.name}
+            value={g.name}
           >
-            {genre.name}
-          </button>
+            {g.name}
+          </GenreButton>
         ))}
       </div>
       <br />
-      <select
+      <SortBar>
+      <Select
         value={`${sort.by}.${sort.order}`}
         onChange={makeItSort}
         ref={selectElPop}
@@ -245,10 +311,11 @@ const Home = () => {
           <option
             key={`${s.by}.${s.order}`}
             value={`${s.by}.${s.order}`}
-          >{`${s.by} ${s.order}`}</option>
+          >{`${s.by}: ${s.order}`}</option>
         ))}
-      </select>
-      <button onClick={clearFilters}>Clear Filters</button>
+      </Select>
+      <ClearFilter onClick={clearFilters}>Clear Filters</ClearFilter>
+      </SortBar>
       <MovieCardContainer>
         {userDetails.isAdmin && (
           <div
@@ -305,7 +372,7 @@ const Home = () => {
           Load More
         </button>
       )}
-    </div>
+    </PaddingContainer>
   );
 };
 
