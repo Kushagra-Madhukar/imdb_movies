@@ -40,33 +40,37 @@ const MovieCardContainer = styled.div`
   @media screen and (max-width: 400px) {
     padding: 1em;
   }
-  div {
-    grid-row: span 1;
-    grid-column: span 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-    box-shadow: 1px 1px 4px #c0c0c0;
-    border-radius: 4px;
-    max-height: 350px;
-    min-height: 300px;
-    background-color: #96351e;
-    &:hover {
-      box-shadow: 2px 2px 20px 7px #c0c0c0;
-      cursor: pointer;
-    }
-    img {
-      display: block;
-      width: 100%;
-      height: calc(100% - 4rem);
-      border-radius: inherit;
-      object-fit: cover;
-      flex: 1;
-    }
-    p {
-      font-size: 1rem;
+  .movie-holder {
+
+    div {
+      grid-row: span 1;
+      grid-column: span 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      box-shadow: 1px 1px 4px #c0c0c0;
+      border-radius: 4px;
+      /* max-height: 350px;
+      min-height: 300px; */
+      /* background-color: ${colorPalette.darkGray}; */
+      &:hover {
+        box-shadow: 2px 2px 20px 7px #c0c0c0;
+        cursor: pointer;
+        transition: box-shadow ease-in-out;
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: calc(100% - 4rem);
+        border-radius: inherit;
+        object-fit: cover;
+        flex: 1;
+      }
+      p {
+        font-size: 1rem;
+      }
     }
   }
 `;
@@ -86,7 +90,7 @@ const SearchBarContainer = styled.div`
   width: 800px;
   position: relative;
   margin: 20px auto;
-  @media (max-width: 800px) {
+  @media (max-width: 850px) {
     width: 80%;
   }
   button {
@@ -318,6 +322,7 @@ const Home = () => {
       </SortBar>
       <MovieCardContainer>
         {userDetails.isAdmin && (
+         <div className="movie-holder">
           <div
             style={{ display: "flex" }}
             onClick={() => navigate(`/movies/new`)}
@@ -328,9 +333,11 @@ const Home = () => {
             />
             {/* <p>{mv.name}</p> */}
           </div>
+          </div>
         )}
         {item.Movies.length !== 0
           ? item.Movies.map((mv, i) => (
+            <div className="movie-holder">
               <div
                 key={mv._id}
                 style={{ display: "flex", position: "relative" }}
@@ -360,6 +367,7 @@ const Home = () => {
                     Delete
                   </button>
                 )}
+              </div>
               </div>
             ))
           : null}
