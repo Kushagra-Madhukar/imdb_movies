@@ -155,6 +155,7 @@ const Home = () => {
     setYear("");
     setGenre("");
     setSort({ by: "popularity", order: "desc" });
+    setSearchTerm("")
     setLoading(false);
   };
 
